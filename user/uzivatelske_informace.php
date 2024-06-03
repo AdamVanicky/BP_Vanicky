@@ -9,9 +9,9 @@ if($_SESSION['uzivatel_role'] == 'administrator') {
     header('Location: ../admin/administrace.php');
 }
 
-$orderQuery = $db->prepare('SELECT * FROM bp_orders WHERE user_id=:id;');
+$orderQuery = $db->prepare('SELECT * FROM bp_orders WHERE autor=:id;');
 $orderQuery->execute([
-        ':id'=>$_SESSION['uzivatel_id']
+        ':id'=>$_SESSION['uzivatel_email']
 ]);
 
 $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -106,6 +106,11 @@ if(!empty($orders)){
             echo '<td>'.$order['cena'].',- Kč</td>';
         }else{
             echo '<td>Nebyla stanovena cena</td>';
+        }
+        if($order['zaplaceno'] > 0){
+            echo '<td>'.$order['zaplaceno'].',- Kč</td>';
+        }else{
+            echo '<td>Doposud jste nic nezaplatil</td>';
         }
         echo '<td><a href="../order/komunikace.php?id='.$order['id'].'" style="color: #e65321;">Otevřít komunikaci</a></td>';
         echo '</tr>';
