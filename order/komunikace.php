@@ -75,7 +75,7 @@ if(!empty($_POST)){
             $mailer->Subject = 'Nová zpráva obdržena';
 
             $mailer->isHTML(true);
-            $mailer->Body = file_get_contents('../inc/email_komunikace.php');
+            $mailer->Body = file_get_contents('../inc/email_komunikace.html');
 
             if ($mailer->send()) {
 

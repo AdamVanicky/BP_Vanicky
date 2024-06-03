@@ -97,7 +97,7 @@ $saveQuery->execute([
         $mailer->Subject='Děkuji za zaslání vašeho návrhu';
 
         $mailer->isHTML(true);
-        $mailer->Body=file_get_contents('../inc/email_content.php');
+        $mailer->Body=file_get_contents('../inc/email_content.html');
 
         if ($mailer->send()) {
             $mailer->addAddress('adam.vanicky@gmail.com');
