@@ -95,6 +95,7 @@ if(!empty($orders)){
         <th>Poznávací název</th>
         <th>Stav</th>
         <th>Cena</th>
+        <th>Zaplaceno</th>
         <th></th>
 </tr>';
     foreach($orders as $order){
