@@ -246,9 +246,9 @@ $techs = $techQuery->fetchAll(PDO::FETCH_ASSOC);
 
         <?php
             foreach ($users as $user){
-                $orderSpecificQuery = $db->prepare('SELECT * FROM bp_orders WHERE user_id=:id;');
+                $orderSpecificQuery = $db->prepare('SELECT * FROM bp_orders WHERE autor=:autor;');
                 $orderSpecificQuery->execute([
-                        ':id'=>$user['id']
+                        ':autor'=>$user['email']
                 ]);
 
                 $ordersSpecific = $orderSpecificQuery->fetchAll(PDO::FETCH_ASSOC);
@@ -261,7 +261,11 @@ $techs = $techQuery->fetchAll(PDO::FETCH_ASSOC);
                 echo '<td>'.htmlspecialchars($user['email']).'</td>';
                 echo '<td>'.count($ordersSpecific).'</td>';
                 echo '<td>'.htmlspecialchars(date('d. m. Y',strtotime($user['datum_registrace']))).'</td>';
-                echo '<td><a href="../user/delete.php?id='.$user['id'].'" style="color: #e65321;">Smazat</a></td>';
+                if($user['role'] != 'administrator'){
+                    echo '<td><a href="../user/delete.php?id='.$user['id'].'" style="color: #e65321;">Smazat</a></td>';
+                }else{
+                    echo '<td></td>';
+                }
                 echo'</tr>';
             }
 

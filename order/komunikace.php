@@ -143,7 +143,7 @@ if(!empty($_POST)){
     <h1>Objednávka č. <?php echo $_GET['id'];?></h1>
     <?php echo '<button class="btn_bot" onclick="location.href=\'../user/uzivatelske_informace.php\'" style=" position: absolute; top: 8px; right: 16px; width: 100px;">Zpět</button>';
 
-    if($_SESSION['uzivatel_role']==2) {
+    if($_SESSION['uzivatel_role'] == 'administrator') {
         echo '<button class="btn_bot" onclick="location.href=\'zmenit.php?id=' . $_GET['id'] . '\'" style=" position: absolute; top: 70px; right: 16px; width: 100px; padding:10px;">Změnit informace</button>';
     }
     ?>

@@ -5,7 +5,7 @@
 require '../inc/user_required.php';
 
 
-if($_SESSION['uzivatel_role'] == 2) {
+if($_SESSION['uzivatel_role'] == 'administrator') {
     header('Location: ../admin/administrace.php');
 }
 

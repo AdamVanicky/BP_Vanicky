@@ -55,11 +55,12 @@ if(!empty($_POST)){
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Kateřina Beránková - Komunikace</title>
+    <title>Kateřina Beránková - Změna informací o objednávce</title>
     <link rel="stylesheet" type="text/css" href="../resources/styles.css">
     <link rel="stylesheet" type="text/css" href="../resources/styles_about.css">
 </head>
 <body>
+<h1>Změnit informace o objednávce</h1>
 <?php
 echo '<form method="post" enctype="multipart/form-data">';
 
@@ -89,6 +90,7 @@ echo'<label for="keyword">Zkuste definovat pár slovy (maximálně 5 slov) zákl
 
 
 echo'<input type="submit" value="Odeslat"/>
+<input type="button" onclick="location.href=\'../order/komunikace.php?id=' . $_GET['id'].'\'" value="Zpět">
 </form>';
 ?>
 </body>

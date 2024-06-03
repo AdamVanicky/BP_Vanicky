@@ -62,10 +62,10 @@ if(!empty($_POST))
 
 
     if(empty($chyby)){
-$saveQuery=$db->prepare('INSERT INTO bp_orders(stav, user_id, jmeno, email,firma,ico,dic, adresa, telefon,pocet, popis,keyword, obrazovy_material) VALUES (:stav,:user, :jmeno,:email,:firma,:ico,:dic,:adresa,:telefon,:pocet,:popis,:keyword,:obrazovy_material)');
+$saveQuery=$db->prepare('INSERT INTO bp_orders(stav, autor, jmeno, email,firma,ico,dic, adresa, telefon,pocet, popis,keyword, obrazovy_material) VALUES (:stav,:user, :jmeno,:email,:firma,:ico,:dic,:adresa,:telefon,:pocet,:popis,:keyword,:obrazovy_material)');
 $saveQuery->execute([
     ':stav'=>'Jednání',
-        ':user'=>$_SESSION['uzivatel_id'],
+        ':user'=>$_SESSION['uzivatel_email'],
         ':jmeno'=>$order_jmeno,
         ':email'=>$order_email,
     ':firma'=>$company,
