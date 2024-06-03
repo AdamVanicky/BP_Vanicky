@@ -12,18 +12,32 @@ if(!empty($_POST)){
     }else{
         $formError = '';
     }
+    $query=$db->prepare('SELECT * FROM bp_users WHERE email=:email LIMIT 1;');
+    $query->execute([
+        ':email' => $_POST['email']
+    ]);
+    $rows=$query->fetchAll(PDO::FETCH_ASSOC);
+
+
+    if(empty($rows)){
+        $formError = 'Uživatel s tímto emailem není v databázi';
+    }else{
+        $row = $rows[0];
+    }
+
 
     if($formError == ''){
-        $query=$db->prepare('SELECT * FROM bp_users WHERE email=:email LIMIT 1;');
-        $query->execute([
-            ':email' => $_POST['email']
-        ]);
-        $rows=$query->fetchAll(PDO::FETCH_ASSOC);
-        $row = $rows[0];
+
 
         define('PRIJEMCE', $_POST['email']);
         $mailer = new PHPMailer(true);
-        $mailer->isSendmail();
+        $mailer->Mailer = 'smtp';
+        $mailer->Host = 'mail.webglobe.cz';
+        $mailer->SMTPAuth = true;
+        $mailer->Username = 'no-reply@berankova-obrazy.cz';
+        $mailer->Password = 'QaYxSw159753';
+        $mailer->SMTPSecure = 'tls';
+        $mailer->Port = 587;
 
         $mailer->addAddress(PRIJEMCE);
         $mailer->setFrom('no-reply@berankova-obrazy.cz');
@@ -35,10 +49,10 @@ if(!empty($_POST)){
 
         $body = '<h1>Vážený uživateli</h1>
 
-<p>Tento email byl zadán pro zaslání odkazu na obnovu hesla. Tak můžete učinit <a href="https://eso.vse.cz/~vana23/BP/user/obnova_hesla.php?user='.$row['id'].'">zde</a></p>
+<p>Tento email byl zadán pro zaslání odkazu na obnovu hesla. Tak můžete učinit <a href="https://eso.vse.cz/~vana23/SP/user/obnova_hesla.php?user='.$row['id'].'">zde</a></p>
 
 <hr>
-<p>Na tento email neodpovídejte. Byl automaticky vygenerován z <a href="https://eso.vse.cz/~vana23/BP/index.php">této webové stránky</a>.</p>';
+<p>Na tento email neodpovídejte. Byl automaticky vygenerován z <a href="https://eso.vse.cz/~vana23/SP/index.php">této webové stránky</a>.</p>';
         $mailer->Body=$body;
 
         if ($mailer->send()) {
