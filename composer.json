@@ -1,0 +1,13 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^6.9",
+        "ext-gd": "*",
+        "mpdf/mpdf": "^8.2"
+    },
+    "config": {
+        "platform": {
+            "php": "8.3.2",
+            "ext-gd":"1"
+        }
+    }
+}

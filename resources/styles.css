@@ -1,0 +1,198 @@
+h1{
+    font-size: 50px;
+    color:white;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+h2{
+    font-size: 42px;
+    color:white;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+input[type="text"], input[type="password"], input[type="email"], input[type="tel"], input[type="number"],input[type="file"], textarea, fieldset{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+fieldset{
+    max-height: 150px;
+    overflow: auto;
+}
+
+input[type="submit"]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #e65321;
+    color:white;
+    opacity: 0.8;
+    font-size: 20px;
+}
+
+input[type="button"]{
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #1284C8;
+    color:white;
+    opacity: 0.8;
+}
+
+input[type="submit"]:hover, input[type="button"]:hover{
+    color:black;
+    opacity: 1;
+}
+
+form {
+    max-width: 800px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background: #f4f7f8;
+    border-radius: 8px;
+}
+a.register_link {
+    text-align: center;
+    color:black;
+}
+
+.mySlides {display: none;}
+img {vertical-align: middle;}
+.container {
+    position: relative;
+}
+.cursor {
+    cursor: pointer;
+}
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 40%;
+    width: auto;
+    padding: 16px;
+    margin-top: -50px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+    -webkit-user-select: none;
+}
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev:hover,
+.next:hover {
+    background-color: #202434;
+}
+.caption-container {
+     text-align: center;
+     background-color: #222;
+     padding: 2px 16px;
+     color: white;
+    font-size: 20px;
+ }
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.column {
+    float: left;
+    width: 20%;
+}
+.demo {
+    opacity: 0.6;
+}
+
+.active,
+.demo:hover {
+    opacity: 1;
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+    .text {font-size: 11px}
+}
+
+@media only screen and (max-width: 1900px) {
+    .btn_bot{
+        display: none;
+    }
+}
+
+#boxes{
+    display: flex;
+    position: relative;
+    background-color: #738A70;
+    align-content: center;
+    justify-content: center;
+}
+
+#boxes div {
+    background-color: #202434;
+    border-radius: 15px;
+    margin: 20px;
+    width: 100%;
+}
+
+.btn_bot{
+    background-color: #e65321;
+    color:white;
+    cursor: pointer;
+    height: 50px;
+    width: 150px;
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 12px;
+}
+
+.filter-option{
+    background-color: #e65321;
+    color:white;
+    cursor: pointer;
+    height: 50px;
+    width: 150px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-150%);
+    border: none;
+    border-radius: 12px;
+}
+
+.btn_bot:hover, .filter-option:hover{
+    opacity: 0.8;
+    color:black;
+}
+
+.mp_text{
+    color:white;
+    padding: 10px;
+    margin-left: 0.5em;
+    font-size: 20px;
+}
+
