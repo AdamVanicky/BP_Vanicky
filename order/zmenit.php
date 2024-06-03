@@ -90,7 +90,7 @@ echo'<label for="keyword">Zkuste definovat pár slovy (maximálně 5 slov) zákl
 
 
 echo'<input type="submit" value="Odeslat"/>
-<input type="button" onclick="location.href=\'../order/komunikace.php?id=' . $_GET['id'].'\'" value="Zpět">
+<input type="button" onclick="location.href=\'../user/uzivatelske_informace.php\'" value="Zpět">
 </form>';
 ?>
 </body>

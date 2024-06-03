@@ -303,6 +303,7 @@ echo '</select>';
             <th>Poslední změna</th>
             <th></th>
             <th></th>
+            <th></th>
     </tr>';
             foreach($orders as $order){
                 $comSpecificQuery = $db->prepare('SELECT * FROM bp_communication WHERE order_id=:id;');
@@ -337,6 +338,9 @@ echo '</select>';
                 echo '<td>'.htmlspecialchars($update).'</td>';
                 echo '<td><a href="../order/komunikace.php?id='.$order['id'].'" style="color: #e65321;">Otevřít komunikaci</a></td>';
                 echo '<td><a href="admin_insert.php?type=invoice&id=' . $order['id'] . '" style="color: #e65321;">Generovat fakturu</a></td>';
+                if($_SESSION['uzivatel_role'] == 'administrator') {
+                    echo '<td><a href="../order/zmenit.php?id=' . $order['id'] . '" style="color: #e65321;">Změnit informace</a></td>';
+                }
                 echo '</tr>';
             }
             echo'</table>';
