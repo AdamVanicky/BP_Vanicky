@@ -5,6 +5,8 @@ require_once '../inc/db.php';
 
 require '../inc/user_required.php';
 
+require '../inc/admin_require.php';
+
 require_once '../vendor/autoload.php';
 
 if($_GET['type'] == 'theme'){

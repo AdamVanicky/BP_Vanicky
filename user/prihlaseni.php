@@ -40,6 +40,10 @@ if(!empty($_POST['email'])){
     <title>Kateřina Beránková - Přihlášení</title>
     <link rel="stylesheet" type="text/css" href="../resources/styles.css">
       <link rel="stylesheet" type="text/css" href="../resources/styles_about.css">
+      <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+      <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+      <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+      <link rel="manifest" href="../site.webmanifest">
   </head>
   <body>
 
@@ -65,9 +69,10 @@ if(!empty($_POST['email'])){
       <input type="submit" value="Přihlásit se">
         <br/>
 
-        <input type="button" onclick="location.href='registrace.php'" value="Nemáte uživatelský učet? Zaregistrujte se!">
-        <input type="button" onclick="location.href='../index.php'" value="Zpět">
-        <input type="button" onclick="location.href='zapomenute_heslo.php'" value="Zapomněli jste heslo?">
+        <input type="button" onclick="location.href='registrace.php'" value="Nemáte uživatelský učet? Zaregistrujte se!"  style="height: 50px; width: 56%; font-size: 20px;">
+
+        <input type="button" onclick="location.href='zapomenute_heslo.php'" value="Zapomněli jste heslo?" style="height: 50px; width: 33%; font-size: 20px;">
+        <input type="button" onclick="location.href='../index.php'" value="Zpět" style="height: 50px; width: 9%; font-size: 20px;">
     </form>
   </body>
 </html>

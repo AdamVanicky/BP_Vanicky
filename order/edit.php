@@ -3,6 +3,7 @@ require_once '../inc/db.php';
 
 require '../inc/user_required.php';
 
+
 $komQuery = $db->prepare('SELECT * FROM bp_communication WHERE id=:id LIMIT 1;');
 $komQuery->execute([
     ':id'=>$_GET['id']
@@ -61,6 +62,10 @@ if(!empty($_POST)) {
     <link rel="stylesheet" type="text/css" href="../resources/styles.css">
     <link rel="stylesheet" type="text/css" href="../resources/styles_about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
 </head>
 
 <body>

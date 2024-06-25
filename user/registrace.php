@@ -25,16 +25,20 @@ if (!empty($_POST)) {
         $chyby[]="Hesla se neshodují";
 
     }
+    if(empty(trim($_POST['phone']))){
+        $chyby[] = 'Je nutno zadat telefonní číslo příjemce';
+    }
 
 
     if(empty($chyby)){
-        $query=$db->prepare('INSERT INTO bp_users(jmeno, prijmeni, email,heslo,role) VALUES(:jmeno, :prijmeni, :email,:heslo, :role);');
+        $query=$db->prepare('INSERT INTO bp_users(jmeno, prijmeni, email,telefon, heslo,role) VALUES(:jmeno, :prijmeni, :email,:telefon, :heslo, :role);');
         $query->execute([
                 ':jmeno'=>$_POST['jmeno'],
             ':prijmeni'=>$_POST['prijmeni'],
             ':email' => $_POST['email'],
+            ':telefon'=>$_POST['phone'],
             ':heslo' => password_hash($_POST['heslo'], PASSWORD_DEFAULT),
-            ':role'=>1
+            ':role'=>'uzivatel'
         ]);
 
         $query=$db->prepare('SELECT * FROM bp_users WHERE email=:email LIMIT 1;');
@@ -49,6 +53,7 @@ if (!empty($_POST)) {
             $_SESSION['uzivatel_jmeno']=$uzivatelDB['jmeno'];
             $_SESSION['uzivatel_prijmeni']=$uzivatelDB['prijmeni'];
             $_SESSION['uzivatel_email']=$uzivatelDB['email'];
+            $_SESSION['uzivatel_tel']=$uzivatelDB['telefon'];
             $_SESSION['uzivatel_dr'] = date('d.m.Y', strtotime($uzivatelDB['datum_registrace']));
             $_SESSION['uzivatel_role']=$uzivatelDB['role'];
 
@@ -65,6 +70,10 @@ if (!empty($_POST)) {
     <title>Kateřina Beránková - Registrace</title>
     <link rel="stylesheet" type="text/css" href="../resources/styles.css">
     <link rel="stylesheet" type="text/css" href="../resources/styles_about.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
 </head>
 <body>
 
@@ -86,6 +95,9 @@ if (!empty($_POST)) {
     <label for="email">E-mailová adresa<span style="color: red;"> *</span></label><br>
     <input type="email" name="email" id="email" value="" required/><br>
 
+    <label for="phone">Telefonní číslo<span style="color: red;"> *</span></label><br>
+    <input type="tel" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{3}" required style="width: 50%;" placeholder="123321123"/><br>
+
     <label for="heslo">Heslo<span style="color: red;"> *</span></label><br>
     <input type="password" name="heslo" id="heslo" value="" required/><br>
 
@@ -103,8 +115,8 @@ if (!empty($_POST)) {
 
     ?>
 
-    <input type="submit" value="Zaregistrovat se"> <br><input type="button" onclick="location.href='prihlaseni.php'" value="Máte uživatelský učet? Přihlašte se!">
-    <input type="button" onclick="location.href='../index.php'" value="Zpět">
+    <input type="submit" value="Zaregistrovat se"> <br><input type="button" onclick="location.href='prihlaseni.php'" value="Máte uživatelský učet? Přihlašte se!" style="height: 50px; width: 50%; font-size: 20px;">
+    <input type="button" onclick="location.href='../index.php'" value="Zpět" style="height: 50px; width: 49%; font-size: 20px;">
 </form>
 
 </body>

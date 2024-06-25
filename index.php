@@ -12,6 +12,10 @@ session_start();
     <link rel="stylesheet" type="text/css" href="resources/styles.css">
     <link rel="stylesheet" type="text/css" href="resources/styles_about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 <body>
 
@@ -70,28 +74,27 @@ session_start();
     </div>
 </div>
 
-<h1>Kateřina Beránková</h1>
-<h2>Obrazy na přání</h2>
-<div id="boxes">
-    <div id="leftbox">
+<h1>Obrazy na přání</h1>
+<div class="example">
+    <div class="example-item lefter">
         <h2>Více o mně</h2>
         <p class="mp_text">Přečtěte si více o mně a o tom, jaké tvorbě se věnuji, mých zkušenostech a také o tom, jaké druhy děl můžete očekávat nebo si objednat.</p>
         <br/>
-        <button class="btn_bot" onclick="location.href='static/o_mne.php'">Zobrazit informace</button>
+        <button class="btn_bot" onclick="location.href='static/o_mne.php'" style="font-size: 17px;">Zobrazit informace</button>
     </div>
 
-    <div id="middlebox">
+    <div class="example-item lefter">
         <h2>Galerie</h2>
         <p class="mp_text">Prohlédněte si mou předchozí tvorbu. Seznamte se tak s mými preferovanými technikami tvorby a tématikami. Získejte tak námět pro novou objednávku.</p>
         <br/>
-        <button class="btn_bot" onclick="location.href='static/galerie.php'">Zobrazit galerii</button>
+        <button class="btn_bot" onclick="location.href='static/galerie.php'" style="font-size: 17px;">Zobrazit galerii</button>
     </div>
 
-    <div id="rightbox">
+    <div class="example-item righter">
         <h2>Objednávka</h2>
         <p class="mp_text">Máte návrh na obraz nebo malbu na míru? Vyhovuje vám styl mé tvorby a tématiky, které realizuji? V tom případě neváhejte a ozvěte se.</p>
         <br/>
-        <button class="btn_bot" onclick="location.href='order/objednavka.php'">Zaslat návrh</button>
+        <button class="btn_bot" onclick="location.href='order/objednavka.php'" style="font-size: 17px;">Zaslat návrh</button>
     </div>
 
 </div>

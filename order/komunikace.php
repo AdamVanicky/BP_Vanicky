@@ -29,11 +29,6 @@ if(!empty($_POST)){
         if(empty(trim($_POST['zprava']))){
             $errors['zprava']= 'Zpráva musí obsahovat nějaký text';
         }
-        if(empty(trim($_POST['keyword']))){
-            $order_keyword = $info['keyword'];
-        }else{
-            $order_keyword = htmlspecialchars(trim($_POST['keyword']));
-        }
 
 
         if(empty($errors)) {
@@ -78,14 +73,18 @@ if(!empty($_POST)){
             $mailer->Body = file_get_contents('../inc/email_komunikace.html');
 
             if ($mailer->send()) {
-
-                $mailer->addAddress('adam.vanicky@gmail.com');
-
-                if ($mailer->send()) {
+                if($_SESSION['uzivatel_role'] != 'administrator'){
+                    $mailer->addAddress('adam.vanicky@gmail.com');
+                    $mailer->Body = file_get_contents('../inc/email_komunikace_admin.html');
+                    if ($mailer->send()) {
+                        $location = 'Location: ../order/komunikace.php?id=' . $_GET['id'];
+                        header($location);
+                    } else {
+                        echo "Vyskytla se chyba: " . $mailer->ErrorInfo;
+                    }
+                }else{
                     $location = 'Location: ../order/komunikace.php?id=' . $_GET['id'];
                     header($location);
-                } else {
-                    echo "Vyskytla se chyba: " . $mailer->ErrorInfo;
                 }
             } else {
                 echo "Vyskytla se chyba: " . $mailer->ErrorInfo;
@@ -102,6 +101,10 @@ if(!empty($_POST)){
     <link rel="stylesheet" type="text/css" href="../resources/styles.css">
     <link rel="stylesheet" type="text/css" href="../resources/styles_about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
     <style>
         #customers {
             font-family: Arial, Helvetica, sans-serif;
@@ -117,10 +120,10 @@ if(!empty($_POST)){
             padding: 8px;
         }
 
-        #customers tr:nth-child(even){background-color: lightgray;}
+        #customers tr:nth-child(even){background-color: #ddd;}
         #customers tr:nth-child(odd){background-color: white;}
 
-        #customers tr:hover {background-color: #ddd;}
+        #customers tr:hover {background-color: #1284C8;}
 
         #customers th {
             padding-top: 12px;
@@ -141,7 +144,7 @@ if(!empty($_POST)){
 
 <div style="position: relative;">
     <h1>Objednávka č. <?php echo $_GET['id'];?></h1>
-    <?php echo '<button class="btn_bot" onclick="location.href=\'../user/uzivatelske_informace.php\'" style=" position: absolute; top: 8px; right: 16px; width: 100px;">Zpět</button>';
+    <?php echo '<button class="btn_bot" onclick="location.href=\'../user/uzivatelske_informace.php\'" style=" position: absolute; top: 8px; right: 16px; width: 100px; font-size: 17px;">Zpět</button>';
 
 
     ?>
@@ -149,45 +152,21 @@ if(!empty($_POST)){
 </div>
 
 
-<h2>Stav - <?php
+<h2><strong>Stav - <?php
     echo $info['stav'];
 
-    ?></h2>
+        ?></strong></h2>
+<select style="width: 25%;
+            padding: 12px 20px;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box; text-align: center; margin: 0 auto;" name="Comm_filter" id="Comm_filter" onchange="getSelectedValueComm()">
+        <option class="filter-option" tabindex="-1" style="background: none; color:black;" value="all">Vše</option>
+        <option class="filter-option" tabindex="-1" style="background: none; color:black;" value="vy">Vy</option>
+        <option class="filter-option" tabindex="-1" style="background: none; color:black;" value="<?php if($_SESSION['uzivatel_role']=='administrator') { $output='Zákazník'; echo'zakaznik'; }else{ $output='Umělkyně'; echo 'umelkyne'; }  ?>" ><?php echo $output;?></option>
 
-<h2>Objednávka a komunikace</h2>
-
-<h3 style="color: white; text-align: center; padding-top: 10px; padding-bottom: 10px; font-size: 30px;">Informace z prvního zadání objednávky</h3>
-
-<table id="customers" style="margin: 0 auto;">
-    <?php
-    if(!empty($info)){
-        $adresa = explode(';', $info['adresa']);
-    echo'<tr><th>Příjemce</th><td>'.htmlspecialchars($info['jmeno']).'</td></tr>';
-        echo'<tr><th>Adresa</th><td>'.htmlspecialchars($adresa[0]).' '.htmlspecialchars($adresa[1]).'</td></tr>';
-        echo'<tr><th>Telefon</th><td>+420 '.htmlspecialchars($info['telefon']).'</td></tr>';
-        echo'<tr><th>Email</th><td>'.htmlspecialchars($info['email']).'</td></tr>';
-        echo'<tr><th>Datum vložení</th><td>'.htmlspecialchars(date('d. m. Y',strtotime($info['datum_vlozeni']))).'</td></tr>';
-        echo'<tr><th>Krátký popis</th><td>'.htmlspecialchars($info['keyword']).'</td></tr>';
-        echo'<tr><th>Detailní popis</th><td>'.htmlspecialchars($info['popis']).'</td></tr>';
-        echo '<tr><th>Obrazový materiál</th>';
-        if($info['obrazovy_material'] != ''){
-            echo'<td><a href="../images/uploads/'.$info['obrazovy_material'].'" target="_blank"><img src="../images/uploads/'.$info['obrazovy_material'].'" alt="Obrazový materiál k objednávce se nepovedlo načíst" style="width: 150px;"></a></td>';
-        }
-        else{
-            echo '<td>Nebyl vložen</td>';
-        }
-        echo'</tr>';
-    }
-
-    ?>
-</table>
-
-    <h3 style="color: white; text-align: center; padding-top: 10px; padding-bottom: 10px; font-size: 30px;">Komunikace objednávky</h3>
-
-
-        <button class="filter-option" data-filter="vy" tabindex="-1" onclick="filterCommunication(event)">Vy</button>
-        <button class="filter-option" data-filter="<?php if($_SESSION['uzivatel_role']==2) { $output='Zákazník'; echo'zakaznik'; }else{ $output='Umělkyně'; echo 'umelkyne'; }  ?>" tabindex="-1" onclick="filterCommunication(event)"><?php echo $output;?></button>
-        <button class="filter-option" data-filter="*" tabindex="-1" onclick="filterCommunication(event)">Vše</button>
+</select>
 <div style="height: 500px; overflow: auto;" id="scroller" class="messages">
     <?php
     if(empty($komunikace)){
@@ -199,17 +178,17 @@ if(!empty($_POST)){
             $time = strtotime($polozka['datum_vlozeni'].' + '.$minutes_to_add.' minute');
             if($polozka['autor']!=$_SESSION['uzivatel_email']){
                 $barvaBack = '#202434';
-                $barvaText = '#1284C8';
+                $barvaText = '#202434';
                 $vypisAutor = $polozka['autor'];
                 $posun = '-50px';
-                if($_SESSION['uzivatel_role']==2) {
+                if($_SESSION['uzivatel_role']=='administrator') {
                     $class='zakaznik';
                 }else{
                     $class='umelkyne';
                 }
             }else{
                 $barvaBack = '#1284C8';
-                $barvaText = '#202434';
+                $barvaText = '#1284C8';
                 $vypisAutor = $polozka['autor'].' (Vy)';
                 $posun = '50px';
                 $class='vy';
@@ -237,10 +216,10 @@ if(!empty($_POST)){
 
 <?php
 if($info['stav'] != 'Zamítnuto'){
-echo '<form method="post" enctype="multipart/form-data">';
+echo '<form method="post" enctype="multipart/form-data" onsubmit="document.getElementById(\'buttonSubmit\').disabled=true;">';
 
 echo'<label for="zprava">Zpráva</label><br>
-    <textarea name="zprava" id="zprava" style="min-width: 100%; max-width: 100%; min-height: 80px;"></textarea><br>';
+    <textarea name="zprava" id="zprava" style="min-width: 100%; max-width: 100%; min-height: 80px;" required></textarea><br>';
 
 if (!empty($errors['zprava'])){
 echo '<div style="background: red; color: white;">'.$errors['zprava;'].'</div>';
@@ -250,29 +229,64 @@ echo '<div style="background: red; color: white;">'.$errors['zprava;'].'</div>';
 echo'<label for="pic">Doplňující obrazový materiál</label><br>
     <input type="file" name="pic" id="pic" style="width: 50%;"/><br>';
 
-echo'<input type="submit" value="Odeslat"/>
+echo'<input type="submit" id="buttonSubmit" value="Odeslat"/>
 </form>';
 }
 ?>
+<h3 style="color: white; text-align: center; padding-top: 10px; padding-bottom: 10px; font-size: 30px;">Informace z prvního zadání objednávky</h3>
 
-<?php include '../inc/footer.php';?>
+<table id="customers" style="margin: 0 auto;">
+    <?php
+    if(!empty($info)){
+        $adresa = explode(';', $info['adresa']);
+        echo'<tr><th>Příjemce</th><td>'.htmlspecialchars($info['jmeno']).'</td></tr>';
+        echo'<tr><th>Adresa</th><td>'.htmlspecialchars($adresa[0]).' '.htmlspecialchars($adresa[1]).'</td></tr>';
+        echo'<tr><th>Telefon</th><td>+420 '.htmlspecialchars($info['telefon']).'</td></tr>';
+        echo'<tr><th>Email</th><td>'.htmlspecialchars($info['email']).'</td></tr>';
+        echo'<tr><th>Datum vložení</th><td>'.htmlspecialchars(date('d. m. Y',strtotime($info['datum_vlozeni']))).'</td></tr>';
+        echo'<tr><th>Poznávací název</th><td>'.htmlspecialchars($info['poznavaci_nazev']).'</td></tr>';
+        echo'<tr><th>Detailní popis</th><td>'.htmlspecialchars($info['popis']).'</td></tr>';
+        echo '<tr><th>Obrazový materiál</th>';
+        if($info['obrazovy_material'] != ''){
+            echo'<td><a href="../images/uploads/'.$info['obrazovy_material'].'" target="_blank"><img src="../images/uploads/'.$info['obrazovy_material'].'" alt="Obrazový materiál k objednávce se nepovedlo načíst" style="width: 150px;"></a></td>';
+        }
+        else{
+            echo '<td>Nebyl vložen</td>';
+        }
+        echo'</tr>';
+    }
+
+    ?>
+</table>
+
 <script>
     var objDiv = document.getElementById("scroller");
     objDiv.scrollTop = objDiv.scrollHeight;
 
-    function filterCommunication(e) {
-        const coms = document.querySelectorAll(".messages div");
-        let filter = e.target.dataset.filter;
-        if (filter === '*') {
-            coms.forEach(com => com.classList.remove('hidden'));
-        }  else {
-            coms.forEach(com => {
-                com.classList.contains(filter) ?
-                    com.classList.remove('hidden') :
-                    com.classList.add('hidden');
-            });
+    function getSelectedValueComm(){
+        const selectValue = document.getElementById("Comm_filter").value;
+        const acceptedValues = ["vy", "umelkyne", "zakaznik"];
+
+        const galleryCards = document.querySelectorAll('.messages div');
+        if(selectValue === "all"){
+            galleryCards.forEach(card => card.classList.remove('hidden'));
+        }
+        else{
+            galleryCards.forEach(card => {
+                if(acceptedValues.includes(selectValue)) {
+                    if(card.classList.contains(selectValue)) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                } else {
+                    card.classList.remove('hidden');
+                }
+            })
         }
     }
+
 </script>
+<?php include '../inc/footer.php';?>
 </body>
 </html>

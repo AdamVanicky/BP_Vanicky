@@ -6,6 +6,10 @@
     <link rel="stylesheet" type="text/css" href="../resources/styles.css">
     <link rel="stylesheet" type="text/css" href="../resources/styles_about.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
     <style>
         .accordion {
             max-width: 700px;
@@ -53,7 +57,7 @@
 
 <section class="o_mne">
     <div class="main">
-        <img alt="Můj oblíbený obraz" src="../images/gallery/sova_mozaika.JPG">
+        <img alt="Má fotografie" src="../images/umelkyne.jpg">
         <div class="about_text">
             <h1>Kateřina Beránková</h1>
             <p>Jmenuji se Kateřina Beránková. Narodila jsem se v Praze, kde jsem vyrostla a vystudovala. Profesně se věnuji fyzioterapii, ale ve volném čase se zabývám tvorbou obrazů pro sebe či na zakázku.</p>
@@ -80,7 +84,7 @@
             <h2>Chtěl bych si nechat vytvořit obraz dle svých představ. Jak to udělám?</h2>
         </label>
         <div>
-            <p>Na webu v části „<a href="../order/objednavka.php" style="color: #e65321; margin: 0;">Objednávka</a>“ je kontaktní formulář, kde si můžete objednat obraz na zakázku včetně různých požadavků na velikost, téma, techniky apod. Objednání je nezávazné. Jakmile obdržím Váš požadavek, začneme se bavit o detailech a ceně obrazu.
+            <p>Na webu v části „<a href="../order/objednavka.php" style=" font-size: 25px;font-weight: bold; margin: 0;">Objednávka</a>“ je kontaktní formulář, kde si můžete objednat obraz na zakázku včetně různých požadavků na velikost, téma, techniky apod. Objednání je nezávazné. Jakmile obdržím Váš požadavek, začneme se bavit o detailech a ceně obrazu.
             </p>
         </div>
     </article>
@@ -102,7 +106,7 @@
             <h2>Kolik stojí obraz na zakázku</h2>
         </label>
         <div>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur veritatis fugiat possimus hic doloremque sint reiciendis? Quasi beatae explicabo qui quod atque a iste. Explicabo inventore quo expedita tempore amet!
+            <p>Cena je vždy dohodou a záleží na konkrétních požadavcích. Obecně platí čím složitější a detailnější motiv či větší obraz, tím delší doba vyhotovení a vyšší cena.
             </p>
         </div>
     </article>

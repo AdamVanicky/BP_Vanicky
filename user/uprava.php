@@ -20,12 +20,16 @@ if(isset($_POST['edit'])){
         $chyby[]="Hesla se neshodují";
 
     }
+    if(empty(trim($_POST['phone']))){
+        $chyby[] = 'Je nutno zadat telefonní číslo příjemce';
+    }
 
 
     $id = $_SESSION['uzivatel_id'];
     $jmeno = $_POST['jmeno'];
     $prijmeni = $_POST['prijmeni'];
     $email = $_POST['email'];
+    $tel = $_POST['phone'];
 
 
     $sel = $db->prepare('SELECT * FROM bp_users WHERE id=:id LIMIT 1');
@@ -38,39 +42,25 @@ if(isset($_POST['edit'])){
 
     if($shoda['id'] == $id){
         if(empty($_POST['heslo'])){
-            if($shoda['email']==$email) {
-                $edit =$db->prepare('UPDATE bp_users SET jmeno=:jmeno, prijmeni=:prijmeni WHERE id=:id');
+
+                $edit =$db->prepare('UPDATE bp_users SET jmeno=:jmeno, prijmeni=:prijmeni, email=:email, telefon=:telefon WHERE id=:id');
                 $edit->execute([
                     ':id'=>$id,
                     ':jmeno'=>$jmeno,
                     ':prijmeni'=>$prijmeni,
+                    ':email'=>$email,
+                    ':telefon'=>$tel
                 ]);
-            }
-            else{
-                $edit =$db->prepare('UPDATE bp_users SET jmeno=:jmeno, prijmeni=:prijmeni, email=:email WHERE id=:id');
-                $edit->execute([
-                    ':id'=>$id,
-                    ':jmeno'=>$jmeno,
-                    ':prijmeni'=>$prijmeni,
-                    ':email'=>$email
-                ]);
-            }
+
         }
-        else if($shoda['email']==$email){
-            $edit =$db->prepare('UPDATE bp_users SET jmeno=:jmeno, prijmeni=:prijmeni, heslo=:heslo WHERE id=:id');
-            $edit->execute([
-                ':id'=>$id,
-                ':jmeno'=>$jmeno,
-                ':prijmeni'=>$prijmeni,
-                ':heslo'=>password_hash($_POST['heslo'], PASSWORD_DEFAULT)
-            ]);
-        }else{
-            $edit =$db->prepare('UPDATE bp_users SET jmeno=:jmeno, prijmeni=:prijmeni, email=:email,heslo=:heslo WHERE id=:id');
+        else{
+            $edit =$db->prepare('UPDATE bp_users SET jmeno=:jmeno, prijmeni=:prijmeni, email=:email, telefon=:telefon,heslo=:heslo WHERE id=:id');
             $edit->execute([
                 ':id'=>$id,
                 ':jmeno'=>$jmeno,
                 ':prijmeni'=>$prijmeni,
                 ':email'=>$email,
+                ':telefon'=>$tel,
                 ':heslo'=>password_hash($_POST['heslo'], PASSWORD_DEFAULT)
             ]);
         }
@@ -80,8 +70,9 @@ if(isset($_POST['edit'])){
         $_SESSION['uzivatel_jmeno']=$jmeno;
         $_SESSION['uzivatel_prijmeni']=$prijmeni;
         $_SESSION['uzivatel_email']=$email;
+        $_SESSION['uzivatel_tel']=$tel;
 
-        header('Location: user/uzivatelske_informace.php');
+        header('Location: ../user/uzivatelske_informace.php');
     }
 }
 
@@ -92,6 +83,10 @@ if(isset($_POST['edit'])){
     <title>Kateřina Beránková - Úprava osobních údajů</title>
     <link rel="stylesheet" type="text/css" href="../resources/styles.css">
     <link rel="stylesheet" type="text/css" href="../resources/styles_about.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
 </head>
 <body>
 
@@ -111,6 +106,9 @@ if(isset($_POST['edit'])){
 
     <label for="email">E-mailová adresa</label><span style="color: red;"> *</span><br>
     <input type="email" name="email" id="email" value="<?php echo htmlspecialchars($_SESSION['uzivatel_email']); ?>" required/><br>
+
+    <label for="phone">Telefonní číslo<span style="color: red;"> *</span></label><br>
+    <input type="tel" id="phone" name="phone" pattern="[0-9]{3}[0-9]{3}[0-9]{3}" required value="<?php echo htmlspecialchars($_SESSION['uzivatel_tel']); ?>"/><br>
 
     <hr>
     <label for="heslo">Změnit heslo</label><br>
