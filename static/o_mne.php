@@ -46,6 +46,10 @@
             font-size: 25px;
             padding:10px;
         }
+
+        h2{
+            font-size: 42px;
+        }
     </style>
 </head>
 
@@ -55,9 +59,11 @@
 
 
 
-<section class="o_mne">
+<div class="o_mne">
     <div class="main">
+        <div class="about_image">
         <img alt="Má fotografie" src="../images/umelkyne.jpg">
+        </div>
         <div class="about_text">
             <h1>Kateřina Beránková</h1>
             <p>Jmenuji se Kateřina Beránková. Narodila jsem se v Praze, kde jsem vyrostla a vystudovala. Profesně se věnuji fyzioterapii, ale ve volném čase se zabývám tvorbou obrazů pro sebe či na zakázku.</p>
@@ -72,7 +78,7 @@
 
     </div>
 
-</section>
+</div>
 
 <h2>FAQ - Často kladené dotazy</h2>
 

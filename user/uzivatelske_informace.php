@@ -55,6 +55,12 @@ $orders = $orderQuery->fetchAll(PDO::FETCH_ASSOC);
             background-color: #198F8C;
             color: white;
         }
+
+        @media only screen and (max-width: 1350px) {
+            #customers{
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>

@@ -139,6 +139,9 @@ $saveQuery->execute([
             float: none;
             width: 50%;
         }
+        .req{
+            font-size: 10px;
+        }
     }
 </style>
 <body>
@@ -146,6 +149,7 @@ $saveQuery->execute([
 <?php include '../inc/navbar.php';?>
 
 <h1>Objednávka</h1>
+
 
 <p style="color:white; font-size: 20px; margin-left: 5em; margin-right: 5em; margin-top: 15px;">
     Je mi ctí, že jste si mne zvolili pro naplnění vašeho přání o obraz na míru. Než ale budu schopna začít s tvorbou onoho vysněného díla, budu potřebovat pár doplňujících informací.
@@ -157,7 +161,7 @@ $saveQuery->execute([
 </p>
 
 <form method="post" enctype="multipart/form-data" onsubmit="document.getElementById('submitBut').disabled=true;">
-
+    <p class="req" style="color: red;text-align: center; margin-bottom: 20px;">* = povinná pole</p>
     <div class="FormCompany">
         <label for="firma">Název firmy</label><br>
         <input type="text" name="firma" id="firma" value="" style="width: 100%;"/><br>
