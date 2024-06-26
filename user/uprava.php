@@ -129,7 +129,7 @@ if(isset($_POST['edit'])){
     ?>
 
     <input type="submit" name="edit" value="Změnit"> <br>
-    <input type="button" onclick="location.href='uzivatelske_informace.php'" value="Zpět">
+    <input type="button" onclick="location.href='uzivatelske_informace.php'" value="Zpět" style="height: 50px; width: 49%; font-size: 20px;">
 </form>
 
 </body>
