@@ -11,8 +11,9 @@ K vývoji jsem použil metodiku MMSP, díky které bylo možné výslednou aplik
 
 <h2>Zobrazení výsledné aplikace</h2>
 <p>
-Tento zdrojový kód slouží jak podklad mé bakalářské práce a ukazuje výsledek implementace aplikace.
 
 Plně funkční web je dostupný na adrese <a>https://www.berankova-obrazy.cz/</a>
+
+Pro zobrazení jakékoliv části aplikace je možné využít prostředí GitHub. Alternativně je možné celý projekt stáhnout.
 
 </p>
